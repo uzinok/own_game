@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Своя игра</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #1a1a5e;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        th,
+        td {
+            border: 3px solid #2a2a8a;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            height: 80px;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        th {
+            background-color: #2a2a8a;
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        td {
+            background-color: #2a2a8a;
+            font-weight: bold;
+            font-size: 36px;
+        }
+
+        td:hover {
+            background-color: #3a3a9a;
+        }
+
+        .category {
+            background-color: #2a2a8a;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 20px;
+            width: 200px;
+        }
+
+        .question-content {
+            font-size: 16px;
+            font-weight: normal;
+            display: none;
+        }
+
+        .answer {
+            color: #ffcc00;
+            font-style: italic;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .used {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 100;
+            max-width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .checkmark {
+            color: #4CAF50;
+            font-size: 36px;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>СВОЯ ИГРА</h1>
+    <button onclick="resetGame()"
+        style="display: block; margin: 20px auto; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Сбросить
+        игру</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Категории / Баллы</th>
+                <th>100</th>
+                <th>200</th>
+                <th>300</th>
+                <th>400</th>
+                <th>500</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- HTML -->
+            <tr>
+                <td class="category">HTML</td>
+                <td data-category="html" data-value="100">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой тег используется для создания нумерованного списка?</div>
+                    <div class="answer hidden">&lt;ol&gt;</div>
+                </td>
+                <td data-category="html" data-value="200">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой атрибут в &lt;input&gt; определяет тип поля (например,
+                        checkbox
+                        или email)?</div>
+                    <div class="answer hidden">type</div>
+                </td>
+                <td data-category="html" data-value="300">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой HTML-элемент семантически обозначает независимый контент
+                        (например, статью)?</div>
+                    <div class="answer hidden">&lt;article&gt;</div>
+                </td>
+                <td data-category="html" data-value="400">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой атрибут в &lt;script&gt; указывает, что скрипт должен
+                        выполняться асинхронно?</div>
+                    <div class="answer hidden">async</div>
+                </td>
+                <td data-category="html" data-value="500">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой метод в HTML5 API позволяет получить геолокацию
+                        пользователя?
+                    </div>
+                    <div class="answer hidden">navigator.geolocation.getCurrentPosition()</div>
+                </td>
+            </tr>
+
+            <!-- CSS -->
+            <tr>
+                <td class="category">CSS</td>
+                <td data-category="css" data-value="100">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какое свойство CSS делает текст жирным?</div>
+                    <div class="answer hidden">font-weight: bold</div>
+                </td>
+                <td data-category="css" data-value="200">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой псевдоэлемент используется для стилизации первой строки
+                        абзаца?
+                    </div>
+                    <div class="answer hidden">::first-line</div>
+                </td>
+                <td data-category="css" data-value="300">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Как с помощью CSS сделать элемент полупрозрачным, не затрагивая
+                        его
+                        содержимое?</div>
+                    <div class="answer hidden">opacity: 0.5</div>
+                </td>
+                <td data-category="css" data-value="400">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какое значение position делает элемент фиксированным
+                        относительно окна
+                        браузера?</div>
+                    <div class="answer hidden">fixed</div>
+                </td>
+                <td data-category="css" data-value="500">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Как с помощью CSS создать сетку из трёх колонок с равными
+                        промежутками?</div>
+                    <div class="answer hidden">.container {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 20px;
+                        }</div>
+                </td>
+            </tr>
+
+            <!-- Наука -->
+            <tr>
+                <td class="category">Наука</td>
+                <td data-category="science" data-value="100">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какая планета третья от Солнца?</div>
+                    <div class="answer hidden">Земля</div>
+                </td>
+                <td data-category="science" data-value="200">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Как называется процесс деления клетки?</div>
+                    <div class="answer hidden">Митоз</div>
+                </td>
+                <td data-category="science" data-value="300">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Кто открыл закон всемирного тяготения?</div>
+                    <div class="answer hidden">Ньютон</div>
+                </td>
+                <td data-category="science" data-value="400">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой химический элемент имеет атомный номер 1?</div>
+                    <div class="answer hidden">Водород</div>
+                </td>
+                <td data-category="science" data-value="500">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Как называется частица, переносящая электромагнитное
+                        взаимодействие?
+                    </div>
+                    <div class="answer hidden">Фотон</div>
+                </td>
+            </tr>
+
+            <!-- Кино -->
+            <tr>
+                <td class="category">Кино</td>
+                <td data-category="movies" data-value="100">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой актер сыграл Тони Старка в MCU?</div>
+                    <div class="answer hidden">Роберт Дауни-мл.</div>
+                </td>
+                <td data-category="movies" data-value="200">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Как называется первая часть "Крестного отца"?</div>
+                    <div class="answer hidden">"Крёстный отец", 1972</div>
+                </td>
+                <td data-category="movies" data-value="300">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Кто режиссер фильма "Начало"?</div>
+                    <div class="answer hidden">Кристофер Нолан</div>
+                </td>
+                <td data-category="movies" data-value="400">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой фильм получил "Оскар" за лучший фильм в 2020 году?</div>
+                    <div class="answer hidden">"Паразиты"</div>
+                </td>
+                <td data-category="movies" data-value="500">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой актер сыграл Джокера в фильме 2019 года?</div>
+                    <div class="answer hidden">Хоакин Феникс</div>
+                </td>
+            </tr>
+
+            <!-- Музыка -->
+            <tr>
+                <td class="category">Музыка</td>
+                <td data-category="music" data-value="100">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Кто исполнил хит "Bohemian Rhapsody"?</div>
+                    <div class="answer hidden">Queen</div>
+                </td>
+                <td data-category="music" data-value="200">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой инструмент является главным в группе "The Beatles"?</div>
+                    <div class="answer hidden">Гитара</div>
+                </td>
+                <td data-category="music" data-value="300">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Кто автор симфонии №5 "Лунная"?</div>
+                    <div class="answer hidden">Бетховен</div>
+                </td>
+                <td data-category="music" data-value="400">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой альбом Майкла Джексона стал самым продаваемым в истории?
+                    </div>
+                    <div class="answer hidden">"Thriller"</div>
+                </td>
+                <td data-category="music" data-value="500">
+                    <div class="question-mark">?</div>
+                    <div class="checkmark hidden">✓</div>
+                    <div class="question-content hidden">Какой композитор написал "Времена года"?</div>
+                    <div class="answer hidden">Антонио Вивальди</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Инициализация игры при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            loadGameState();
+
+            // Добавляем обработчики кликов для всех ячеек
+            document.querySelectorAll('td[data-category]').forEach(cell => {
+                cell.addEventListener('click', function () {
+                    handleCellClick(this);
+                });
+            });
+        });
+
+        // Текущий активный тултип
+        let activeTooltip = null;
+        // Текущее состояние ячеек (1 - вопрос, 2 - ответ, 3 - галочка)
+        const cellState = {};
+
+        // Функция для сохранения состояния игры
+        function saveGameState() {
+            const gameState = {};
+            document.querySelectorAll('td[data-category]').forEach(cell => {
+                const category = cell.getAttribute('data-category');
+                const value = cell.getAttribute('data-value');
+                const key = `${category}_${value}`;
+
+                const questionMark = cell.querySelector('.question-mark');
+                const checkmark = cell.querySelector('.checkmark');
+
+                gameState[key] = {
+                    questionMarkHidden: questionMark.classList.contains('hidden'),
+                    checkmarkShown: checkmark.classList.contains('show'),
+                    cellUsed: cell.classList.contains('used'),
+                    state: cellState[key] || 0
+                };
+            });
+
+            localStorage.setItem('gameState', JSON.stringify(gameState));
+        }
+
+        // Функция для загрузки состояния игры
+        function loadGameState() {
+            const savedState = localStorage.getItem('gameState');
+            if (!savedState) return;
+
+            const gameState = JSON.parse(savedState);
+
+            document.querySelectorAll('td[data-category]').forEach(cell => {
+                const category = cell.getAttribute('data-category');
+                const value = cell.getAttribute('data-value');
+                const key = `${category}_${value}`;
+
+                if (gameState[key]) {
+                    const state = gameState[key];
+                    const questionMark = cell.querySelector('.question-mark');
+                    const checkmark = cell.querySelector('.checkmark');
+
+                    if (state.questionMarkHidden) {
+                        questionMark.classList.add('hidden');
+                    }
+
+                    if (state.checkmarkShown) {
+                        checkmark.classList.add('show');
+                        cell.classList.add('used');
+                    }
+
+                    if (state.cellUsed) {
+                        cell.classList.add('used');
+                    }
+
+                    cellState[key] = state.state || 0;
+                }
+            });
+        }
+
+        // Функция для сброса игры
+        function resetGame() {
+            if (confirm('Вы уверены, что хотите сбросить игру? Все прогресс будет потерян.')) {
+                localStorage.removeItem('gameState');
+                location.reload();
+            }
+        }
+
+        // Функция обработки клика по ячейке
+        function handleCellClick(cell) {
+            if (cell.classList.contains('used')) return;
+
+            const category = cell.getAttribute('data-category');
+            const value = cell.getAttribute('data-value');
+            const key = `${category}_${value}`;
+
+            const questionMark = cell.querySelector('.question-mark');
+            const checkmark = cell.querySelector('.checkmark');
+            const questionContent = cell.querySelector('.question-content');
+            const answer = cell.querySelector('.answer');
+
+            // Увеличиваем счетчик состояния
+            cellState[key] = (cellState[key] || 0) + 1;
+
+            // Удаляем текущий тултип
+            if (activeTooltip) {
+                activeTooltip.remove();
+                activeTooltip = null;
+            }
+
+            // Обрабатываем в зависимости от состояния
+            if (cellState[key] === 1) {
+                // Первый клик - показываем вопрос
+                showTooltip(cell, questionContent.textContent);
+                questionMark.classList.add('hidden');
+            } else if (cellState[key] === 2) {
+                // Второй клик - показываем ответ
+                showTooltip(cell, answer.textContent);
+            } else if (cellState[key] >= 3) {
+                // Третий клик - показываем галочку
+                checkmark.classList.add('show');
+                cell.classList.add('used');
+                cellState[key] = 3; // Фиксируем конечное состояние
+            }
+
+            // Сохраняем состояние игры
+            saveGameState();
+        }
+
+        // Функция для отображения тултипа
+        function showTooltip(cell, text) {
+            // Удаляем предыдущий тултип
+            if (activeTooltip) {
+                activeTooltip.remove();
+            }
+
+            // Создаем новый тултип
+            activeTooltip = document.createElement('div');
+            activeTooltip.className = 'tooltip';
+            activeTooltip.textContent = text;
+
+            // Позиционируем тултип
+            const rect = cell.getBoundingClientRect();
+            activeTooltip.style.left = `${rect.left + window.scrollX}px`;
+            activeTooltip.style.top = `${rect.top + window.scrollY - 100}px`;
+
+            // Если тултип выходит за верхнюю границу окна, показываем его снизу
+            if (rect.top - 100 < 0) {
+                activeTooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+            }
+
+            document.body.appendChild(activeTooltip);
+        }
+    </script>
+</body>
+
+</html>
