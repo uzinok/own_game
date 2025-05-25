@@ -114,6 +114,12 @@
     <button onclick="resetGame()"
         style="display: block; margin: 20px auto; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Сбросить
         игру</button>
+
+        <div style="text-align: center; margin-bottom: 1em;">
+            <a style="color: #ffffff;" href="index.html">Первый раунд</a>
+            <a style="color: #ffffff;" href="index-2.html">Второй раунд</a>
+            <a style="color: #ffffff;" href="index-3.html">Третий раунд</a>
+        </div>
     <table>
         <thead>
             <tr>
@@ -326,7 +332,7 @@
     <script>
         // Инициализация игры при загрузке страницы
         document.addEventListener('DOMContentLoaded', function () {
-            loadGameState();
+            loadgameState1();
 
             // Добавляем обработчики кликов для всех ячеек
             document.querySelectorAll('td[data-category]').forEach(cell => {
@@ -342,8 +348,8 @@
         const cellState = {};
 
         // Функция для сохранения состояния игры
-        function saveGameState() {
-            const gameState = {};
+        function savegameState1() {
+            const gameState1 = {};
             document.querySelectorAll('td[data-category]').forEach(cell => {
                 const category = cell.getAttribute('data-category');
                 const value = cell.getAttribute('data-value');
@@ -352,7 +358,7 @@
                 const questionMark = cell.querySelector('.question-mark');
                 const checkmark = cell.querySelector('.checkmark');
 
-                gameState[key] = {
+                gameState1[key] = {
                     questionMarkHidden: questionMark.classList.contains('hidden'),
                     checkmarkShown: checkmark.classList.contains('show'),
                     cellUsed: cell.classList.contains('used'),
@@ -360,23 +366,23 @@
                 };
             });
 
-            localStorage.setItem('gameState', JSON.stringify(gameState));
+            localStorage.setItem('gameState1', JSON.stringify(gameState1));
         }
 
         // Функция для загрузки состояния игры
-        function loadGameState() {
-            const savedState = localStorage.getItem('gameState');
+        function loadgameState1() {
+            const savedState = localStorage.getItem('gameState1');
             if (!savedState) return;
 
-            const gameState = JSON.parse(savedState);
+            const gameState1 = JSON.parse(savedState);
 
             document.querySelectorAll('td[data-category]').forEach(cell => {
                 const category = cell.getAttribute('data-category');
                 const value = cell.getAttribute('data-value');
                 const key = `${category}_${value}`;
 
-                if (gameState[key]) {
-                    const state = gameState[key];
+                if (gameState1[key]) {
+                    const state = gameState1[key];
                     const questionMark = cell.querySelector('.question-mark');
                     const checkmark = cell.querySelector('.checkmark');
 
@@ -401,7 +407,7 @@
         // Функция для сброса игры
         function resetGame() {
             if (confirm('Вы уверены, что хотите сбросить игру? Все прогресс будет потерян.')) {
-                localStorage.removeItem('gameState');
+                localStorage.removeItem('gameState1');
                 location.reload();
             }
         }
@@ -444,7 +450,7 @@
             }
 
             // Сохраняем состояние игры
-            saveGameState();
+            savegameState1();
         }
 
         // Функция для отображения тултипа
