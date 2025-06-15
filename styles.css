@@ -1,0 +1,196 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 20px;
+	background-color: #1a237e;
+	color: white;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.round {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.game-container {
+	display: flex;
+	gap: 20px;
+	height: calc(100vh - 150px);
+}
+
+.players-container {
+	flex: 1;
+	min-width: 250px;
+	display: flex;
+	flex-direction: column;
+}
+
+.players {
+	background-color: #303f9f;
+	padding: 20px;
+	border-radius: 5px;
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+.game-content {
+	flex: 4;
+	display: flex;
+	gap: 20px;
+}
+
+.topics-container {
+	flex: 3;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+.topics {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 10px;
+	overflow-y: auto;
+	flex-grow: 1;
+}
+
+.question-display-container {
+	flex: 2;
+	min-width: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+.question-display {
+	background-color: #303f9f;
+	padding: 20px;
+	border-radius: 5px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 0;
+}
+
+.question-text {
+	font-size: 24px;
+	text-align: center;
+	word-break: break-word;
+	overflow-y: auto;
+	max-height: 100%;
+	width: 100%;
+}
+
+.player {
+	margin-bottom: 15px;
+	padding: 10px;
+	background-color: #3f51b5;
+	border-radius: 5px;
+}
+
+.player-name {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.player-controls {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin-bottom: 5px;
+}
+
+.player-score {
+	font-size: 18px;
+}
+
+button {
+	background-color: #ffc107;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+button:hover {
+	background-color: #ffd54f;
+}
+
+.reset-btn {
+	background-color: #f44336;
+	color: white;
+	padding: 10px 20px;
+	margin-bottom: 20px;
+}
+
+.reset-btn:hover {
+	background-color: #ef5350;
+}
+
+.add-player-btn {
+	background-color: #4CAF50;
+	color: white;
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+.add-player-btn:hover {
+	background-color: #66BB6A;
+}
+
+input {
+	padding: 5px;
+	text-align: center;
+}
+
+.score-btn {
+	width: 30px;
+	padding: 5px;
+}
+
+.points-input {
+	width: 60px;
+	padding: 5px;
+	text-align: center;
+}
+
+.add-player-form {
+	display: none;
+	margin-top: 10px;
+	gap: 5px;
+	flex-direction: column;
+}
+
+.add-player-form input {
+	padding: 8px;
+	width: calc(100% - 16px);
+}
+
+.add-player-form button {
+	width: 100%;
+}
+
+.question.active {
+	background-color: #5c6bc0;
+	cursor: pointer;
+}
+
+.question.opened {
+	background-color: #2e7d32;
+	cursor: default;
+}
+
+.question.opened:hover {
+	background-color: #2e7d32;
+}
+
+.question.opened .question-value {
+	font-size: 24px;
+}
