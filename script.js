@@ -201,9 +201,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					document.getElementById('question-text').textContent = questionData.question;
 					document.getElementById('answer-text').textContent = '';
-					this.textContent = '😊';
+					this.textContent = '!!!';
+					this.style.color = '#ffffff';
 					saveToCache();
-				} else if (this.textContent === '😊') {
+				} else if (this.textContent === '!!!') {
 					document.getElementById('answer-text').textContent = questionData.answer;
 					this.textContent = '✓';
 					this.style.color = '#4CAF50';
