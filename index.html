@@ -9,40 +9,100 @@
 </head>
 
 <body>
-    <div class="header">
-        <h1>Своя игра</h1>
-        <div class="round">Раунд 1</div>
-        <button class="reset-btn" id="resetGame">Сбросить игру</button>
-    </div>
-
-    <div class="game-container">
-        <div class="players-container">
-            <div class="players">
-                <h2>Игроки</h2>
-                <div id="playersList"></div>
-                <button class="add-player-btn" id="addPlayerBtn">+ Добавить игрока</button>
-                <div class="add-player-form" id="addPlayerForm">
-                    <input type="text" id="playerNameInput" placeholder="Имя игрока">
-                    <button id="confirmAddPlayer">OK</button>
+    <div class="container">
+        <div class="players-panel">
+            <h2>Игроки</h2>
+            <div class="players-list">
+                <div class="add-player-form">
+                    <input type="text" id="player-name" placeholder="Введите имя игрока" required>
+                    <button id="confirm-add-player" class="add-btn">Добавить</button>
                 </div>
+                <div id="players-container"></div>
+                <button id="reset-game" class="reset-btn">Сбросить игру</button>
             </div>
         </div>
-
-        <div class="game-content">
-            <div class="topics-container">
-                <div class="topics"></div>
+        <div class="game-area">
+            <div class="game-board">
+                <h2 class="round-title">Первый раунд</h2>
+                <table>
+                    <tr>
+                        <th>Темы</th>
+                        <th>100</th>
+                        <th>200</th>
+                        <th>300</th>
+                        <th>400</th>
+                        <th>500</th>
+                    </tr>
+                    <tr>
+                        <td>Тема 1</td>
+                        <td class="question-cell" data-theme="1" data-scores="100">?</td>
+                        <td class="question-cell" data-theme="1" data-scores="200">?</td>
+                        <td class="question-cell" data-theme="1" data-scores="300">?</td>
+                        <td class="question-cell" data-theme="1" data-scores="400">?</td>
+                        <td class="question-cell" data-theme="1" data-scores="500">?</td>
+                    </tr>
+                    <tr>
+                        <td>Тема 2</td>
+                        <td class="question-cell" data-theme="2" data-scores="100">?</td>
+                        <td class="question-cell" data-theme="2" data-scores="200">?</td>
+                        <td class="question-cell" data-theme="2" data-scores="300">?</td>
+                        <td class="question-cell" data-theme="2" data-scores="400">?</td>
+                        <td class="question-cell" data-theme="2" data-scores="500">?</td>
+                    </tr>
+                    <tr>
+                        <td>Тема 3</td>
+                        <td class="question-cell" data-theme="3" data-scores="100">?</td>
+                        <td class="question-cell" data-theme="3" data-scores="200">?</td>
+                        <td class="question-cell" data-theme="3" data-scores="300">?</td>
+                        <td class="question-cell" data-theme="3" data-scores="400">?</td>
+                        <td class="question-cell" data-theme="3" data-scores="500">?</td>
+                    </tr>
+                    <tr>
+                        <td>Тема 4</td>
+                        <td class="question-cell" data-theme="4" data-scores="100">?</td>
+                        <td class="question-cell" data-theme="4" data-scores="200">?</td>
+                        <td class="question-cell" data-theme="4" data-scores="300">?</td>
+                        <td class="question-cell" data-theme="4" data-scores="400">?</td>
+                        <td class="question-cell" data-theme="4" data-scores="500">?</td>
+                    </tr>
+                    <tr>
+                        <td>Тема 5</td>
+                        <td class="question-cell" data-theme="5" data-scores="100">?</td>
+                        <td class="question-cell" data-theme="5" data-scores="200">?</td>
+                        <td class="question-cell" data-theme="5" data-scores="300">?</td>
+                        <td class="question-cell" data-theme="5" data-scores="400">?</td>
+                        <td class="question-cell" data-theme="5" data-scores="500">?</td>
+                    </tr>
+                </table>
             </div>
-
-            <div class="question-display-container">
+            <div class="question-panel">
                 <div class="question-display">
-                    <div class="question-text">Выберите вопрос</div>
+                    <h3>Вопрос:</h3>
+                    <p id="question-text">Выберите вопрос из таблицы</p>
+                </div>
+                <div class="answer-display">
+                    <h3>Ответ:</h3>
+                    <p id="answer-text">Здесь будет отображаться ответ</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <template id="player-template">
+        <div class="player">
+            <div class="player-name"></div>
+            <div class="player-controls">
+                <button class="score-btn minus">-</button>
+                <input type="number" class="score-input" value="0" readonly>
+                <button class="score-btn plus">+</button>
+            </div>
+            <div class="player-total">
+                Очки: <span class="total-score">0</span>
+            </div>
+        </div>
+    </template>
 
     <script src="script.js"></script>
-    <script src="game.js"></script>
 </body>
 
 </html>
